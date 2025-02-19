@@ -34,7 +34,7 @@ public class BookValidationTests {
         var book = new Book("1234567890A", "some", "Same", 9.99);
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertThat(violations).hasSize(1);
-        assertThat(violations.iterator().next().getMessage()).isEqualTo("ISBN should be in valid format");
+        assertThat(violations.iterator().next().getMessage()).isEqualTo("ISBN1 should be in valid format");
     }
 
     
