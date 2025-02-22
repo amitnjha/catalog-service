@@ -1,14 +1,14 @@
 package com.vig.catalogservice;
 
-import org.springframework.beans.factory.annotation.Value;
+// import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HomeController {
 
-    @Value("${polar.greeting}")
-    String greeting;
+    //@Value("${polar.greeting}")
+    String greeting = "temp";
 
     @GetMapping("/")
     public String getGereeting(){
