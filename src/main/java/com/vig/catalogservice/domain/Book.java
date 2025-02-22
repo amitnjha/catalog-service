@@ -1,11 +1,20 @@
 package com.vig.catalogservice.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
 public record Book(
+    
+    @Id
+    Long id,
+
+    @Version
+    int version,
     
     @NotBlank(message =  "The Book isbn must be defined")
     @Pattern(
@@ -21,5 +30,8 @@ public record Book(
     @Positive(message = "The book price must be greater than zero.")
     Double price
 ) {
+    public static Book of(String isbn, String title, String author, Double price){
+        return new Book(null, 0, isbn, title, author, price);
+    }
     
 }
