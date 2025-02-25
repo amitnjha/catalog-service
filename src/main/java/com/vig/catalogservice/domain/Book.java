@@ -1,6 +1,10 @@
 package com.vig.catalogservice.domain;
 
+import java.time.Instant;
+
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Version;
 
 import jakarta.validation.constraints.NotBlank;
@@ -28,10 +32,14 @@ public record Book(
     String author,
     @NotNull(message =  "The Book price must be defined")
     @Positive(message = "The book price must be greater than zero.")
-    Double price
+    Double price,
+    @CreatedDate
+    Instant createdDate,
+    @LastModifiedDate
+    Instant lastModifiedDate
 ) {
     public static Book of(String isbn, String title, String author, Double price){
-        return new Book(null, 0, isbn, title, author, price);
+        return new Book(null, 0, isbn, title, author, price, null , null);
     }
     
 }

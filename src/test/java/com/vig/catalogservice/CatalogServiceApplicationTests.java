@@ -2,6 +2,8 @@ package com.vig.catalogservice;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.Instant;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +23,7 @@ class CatalogServiceApplicationTests {
 
 	@Test
 	void whenPostRequestTheBookCreated() {
-		var expectedBook = new Book("1234567890", "some", "some", 9.99);
+		var expectedBook = new Book(0L,0,"1234567890", "some", "some", 9.99, Instant.now(), Instant.now());
 
 		webTestClient.post()
 			.uri("/books")

@@ -1,8 +1,7 @@
 package com.vig.catalogservice.domain;
 
+import java.time.Instant;
 import java.util.Set;
-
-import javax.xml.validation.Validator;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -24,14 +23,14 @@ public class BookValidationTests {
 
     @Test
     void whenAllFieldsCorrectValidationSucceeeds(){
-        var book = new Book("1234567890", "some", "Same", 9.99);
+        var book = new Book(0L,0,"1234567890", "some", "Same", 9.99, Instant.now(), Instant.now());
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertThat(violations).isEmpty();
     }
 
     @Test
     void whenAllFieldsNotCorrectValidationFails(){
-        var book = new Book("1234567890A", "some", "Same", 9.99);
+        var book = new Book(0L,0,"1234567890A", "some", "Same", 9.99, Instant.now(), Instant.now());
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertThat(violations).hasSize(1);
         assertThat(violations.iterator().next().getMessage()).isEqualTo("ISBN should be in valid format");
