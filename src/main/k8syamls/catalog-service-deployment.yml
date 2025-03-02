@@ -5,6 +5,7 @@ metadata:
   labels:
     app: catalog-service
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: catalog-service
@@ -15,13 +16,30 @@ spec:
     spec:
       containers:
       - name: catalog-service
-        image: ghcr.io/amitnjha/catalog-service:latest
-        imagePullPolicy: IfNotPresent
+        image: amitnjha/catalog-service:latest
+        imagePullPolicy: Always #IfNotPresent
         ports:
           - containerPort: 8080
         env:
           - name: BPL_JVM_THREAD_COUNT
             value: "50"
           - name: SPRING_DATASOURCE_URL
-            value: jdbc://postgresql://polar-postgres/polardb_catalog
+            # value: jdbc:postgresql://polar-postgres.springbook.svc.cluster.local/polardb_catalog
+            value: jdbc:postgresql://10.104.108.218/polardb_catalog
 
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog-service
+  labels:
+    app: catalog-service
+spec:
+  type: ClusterIP
+  selector:
+    app: catalog-service
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080

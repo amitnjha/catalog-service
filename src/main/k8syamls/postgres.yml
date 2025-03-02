@@ -23,6 +23,8 @@ spec:
               value: password
             - name: POSTGRES_DB
               value: polardb_catalog
+            #- name: POSTGRES_LISTEN_ADDRESS
+            #  value: polar-postgres.springbook.svc.cluster.local
           resources:
             requests:
               cpu: 100m
@@ -47,3 +49,15 @@ spec:
   - protocol: TCP
     port: 5432
     targetPort: 5432
+
+---
+
+# apiVersion: v1
+# kind: Endpoints
+# metadata:
+#   name: polar-postgres
+# subsets:
+# - addresses:
+#     - ip: 10.0.2.2
+#   ports:
+#     - port: 5432

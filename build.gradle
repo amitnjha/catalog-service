@@ -12,7 +12,7 @@ version = '0.0.2-SNAPSHOT'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(23)
+		languageVersion = JavaLanguageVersion.of(17)
 	}
 }
 
@@ -47,5 +47,5 @@ tasks.named('test') {
 
 bootBuildImage {
 	imageName = "${project.name}"
-	environment = ["BP_JVM_VERSION" : "23.*"]
+	environment = ["BP_JVM_VERSION" : "17.*"]
 }
